@@ -1,0 +1,33 @@
+<?php
+
+class Customer {
+
+    public $firstName;
+    public $lastName;
+    public $birthDate;
+    public $salary;
+    public $civicNumber;
+    public $street;
+    public $city;
+    public $state;
+    public $postcode;
+
+    
+    public $dateEnd;
+    public $salaryEnd;
+    
+    public function __construct($firstname="", $lastname="", $birthdate="", $salary="", $civicnumber="", $street="", $city="", $state="", $postcode="") {
+
+        $this->firstName = $firstname;
+        $this->lastName = $lastname;
+        $this->birthDate = $birthdate;
+        $this->salary = $salary;
+        $this->civicNumber = $civicnumber;
+        $this->street = $street;
+        $this->city = $city;
+        $this->state = $state;
+        $this->postcode = $postcode;
+    }
+    
+    
+}

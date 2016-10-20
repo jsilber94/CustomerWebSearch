@@ -1,0 +1,91 @@
+<?php
+
+require "Customer";
+
+class CustomerDAO {
+
+    public $customer;
+
+    public function __construct($class) {
+
+        $this->customer = $class;
+    }
+
+    public function insertIntoDB() {
+        try {
+            $user = 'CS1133611';
+            $password = 'alverion';
+            $dataSourceName = 'mysql:host=waldo2.dawsoncollege.qc.ca;dbname=CS1133611';
+            $pdo = new PDO($dataSourceName, $user, $password);
+
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $pdo->prepare("INSERT INTO Customer (firstname,lastname,birthdate,salary,civicnumber,street,city,state,postcode) VALUES(?,?,?,?,?,?,?,?,?)");
+
+            $stmt->bindParam(1, $this->customer->firstName);
+            $stmt->bindParam(2, $this->customer->lastName);
+            $stmt->bindParam(3, $this->customer->birthDate);
+            $stmt->bindParam(4, $this->customer->salary);
+            $stmt->bindParam(5, $this->customer->civicNumber);
+            $stmt->bindParam(6, $this->customer->street);
+            $stmt->bindParam(7, $this->customer->city);
+            $stmt->bindParam(8, $this->customer->state);
+            $stmt->bindParam(9, $this->customer->postcode);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($pdo);
+        }
+    }
+
+    public function find() {
+
+        try {
+            $user = 'CS1133611';
+            $password = 'alverion';
+            $dataSourceName = 'mysql:host=waldo2.dawsoncollege.qc.ca;dbname=CS1133611';
+            $pdo = new PDO($dataSourceName, $user, $password);
+
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $pdo->prepare("SELECT * from Customer where salary >= ? and salary <=? and postcode like ? and birthdate between ? and ?");
+
+
+
+
+            $salarStart = $this->customer->salary;
+            $stmt->bindValue(1, $salarStart);
+
+            $salarEnd = $this->customer->salaryEnd;
+            $stmt->bindValue(2, $salarEnd);
+
+            $post = $this->customer->postcode;
+            $post = "%" . $post;
+            $stmt->bindValue(3, $post);
+
+            $bDate = $this->customer->birthDate;
+            $stmt->bindValue(4, $bDate);
+
+            $eDate = $this->customer->dateEnd;
+            $stmt->bindValue(5, $eDate);
+
+
+            $customer = [];
+            if ($stmt->execute()) {
+                $i = 0;
+
+                while ($row = $stmt->fetch()) {
+                   
+                    $customer[$i] = new Customer($row["firstname"], $row["lastname"], $row["birthdate"], $row["salary"], $row["civicnumber"], $row["street"], $row["city"], $row["state"], $row["postcode"]);
+                    $i++;
+                }
+            }
+
+            return $customer;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        } finally {
+            unset($pdo);
+        }
+    }
+
+}
