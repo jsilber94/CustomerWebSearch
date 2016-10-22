@@ -49,7 +49,7 @@ class CustomerDAO {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $stmt = $pdo->prepare("SELECT * from Customer where salary >= ? and salary <=? and postcode like ? and birthdate between ? and ?");
 
-
+            
 
 
             $salarStart = $this->customer->salary;

@@ -6,11 +6,13 @@
             Postcode:<br>
             <input type="number" name="postcode">
             <br>
+            numbers Between 10000 1000000
+            <br>
             Salary start: <br>
-            <input type="number" name="salarystart" min = 1000>
+            <input type="number" name="salarystart" min = 10000>
             <br>
             Salary end:<br>
-            <input type="number" name="salaryend" min = 1000>
+            <input type="number" name="salaryend" max = 1000000>
 
             <br>
             Date start:<br>
@@ -57,7 +59,7 @@
 
             $dao = new CustomerDAO($customer);
             $students = $dao->find();
-
+           
             echo "<table>";
 
             echo "<tr>
