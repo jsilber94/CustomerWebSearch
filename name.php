@@ -8,6 +8,10 @@
 
 
     </body>
-</html>        
+</html>
 
+
+<?php
+if (isset($_GET['letter']))
+    echo $_GET['letter'];
 
