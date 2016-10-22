@@ -1,26 +1,22 @@
 
 function keyPress(e) {
-    var l = e.keyCode;
-    var letter = String.fromCharCode(l);
+
+    var letter = String.fromCharCode(e.keyCode);
 
     var xmlhttp = new XMLHttpRequest();
 
-    var queryString = "?letter=" + letter;
-    xmlhttp.open("GET", "name.php" + queryString, true);
-
     xmlhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
 
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
-            xmlhttp.send();
-        alert(sent);
-    }
+            document.getElementById()
+        }
+    };
 
-
-
-
-
-
+    xmlhttp.open("GET", "name.php?letter=" + letter, true);
+    xmlhttp.send();
 
 }
 
-    
+
+
+
