@@ -10,6 +10,7 @@ class CustomerDAO {
 
         $this->customer = $class;
     }
+    
 
     public function insertIntoDB() {
         try {
@@ -59,7 +60,7 @@ class CustomerDAO {
             $stmt->bindValue(2, $salarEnd);
 
             $post = $this->customer->postcode;
-            $post = "%" . $post;
+            $post =  $post."%" ;
             $stmt->bindValue(3, $post);
 
             $bDate = $this->customer->birthDate;

@@ -8,8 +8,10 @@
 
             function keyPress(e) {
 
-                var letter = String.fromCharCode(e.keyCode);
-
+                
+                var letter= document.getElementById('lname').value;
+                letter +=String.fromCharCode(e.keyCode);
+          
                 var xmlhttp = new XMLHttpRequest();
 
                 xmlhttp.onreadystatechange = function () {
